@@ -1,4 +1,4 @@
-# Employee Attritoin
+# Employee Attrition
 
 ## Running the App
 
