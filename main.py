@@ -15,7 +15,7 @@ def main() -> None:
     data = load_data(DATA_PATH)
     data = DataSource(data)
 
-    app.title = "Heart Disease Dashboard"
+    app.title = "Employee Attrition Dashboard"
     app.layout = create_layout(app, data)
     app.run(debug=True,port="8080")
 
