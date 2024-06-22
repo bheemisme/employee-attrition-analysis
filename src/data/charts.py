@@ -237,10 +237,7 @@ def plot_education_attrition(ds: DataSource) -> go.Figure:
             DataSchema.attrition
         ]
     )
-
     fig.update_layout(
-        title_text="Education - Attrition",
-        
+        title_text="Education - Attrition"
     )
-
     return fig
