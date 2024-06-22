@@ -113,10 +113,11 @@ def plot_employee_env_sat(ds: DataSource) -> go.Figure:
 
 def plot_employee_job_sat(ds: DataSource) -> go.Figure:
 
-    fig = px.parallel_categories(ds.df, dimensions=[DataSchema.department,
-                                                    DataSchema.job_satisfaction,
-                                                    DataSchema.attrition
-                                                    ])
+    fig = px.parallel_categories(ds.df, dimensions=[
+        DataSchema.department,
+        DataSchema.job_satisfaction,
+        DataSchema.attrition
+    ])
 
     fig.update_layout(title_text="Job Satisfaction")
 
@@ -129,7 +130,7 @@ def plot_working_groups(ds: DataSource) -> go.Figure:
                  x=DataSchema.working_year_groups,
                  y=DataSchema.monthly_income,
                  color=DataSchema.attrition
-                 )
+                )
 
     fig.update_layout(
         title_text='Working Groups - Monthly Income',
@@ -155,17 +156,91 @@ def plot_years_at_company_groups(ds: DataSource) -> go.Figure:
 
 def plot_age_monthly_income(ds: DataSource) -> go.Figure:
     fig = px.histogram(ds.df,
-                  x=DataSchema.age_groups,
-                  y=DataSchema.monthly_income,
-                  color=DataSchema.attrition,
-                   histfunc="avg" ,
-                   barmode="overlay"
-                  )
+                       x=DataSchema.age_groups,
+                       y=DataSchema.monthly_income,
+                       color=DataSchema.attrition,
+                       histfunc="avg",
+                       barmode="overlay"
+                       )
 
     fig.update_layout(
         title_text="Age - Monthly Income",
         xaxis_title="Age",
         yaxis_title="Monthly Income"
+    )
+
+    return fig
+
+
+def plot_age_total_work_years(ds: DataSource) -> go.Figure:
+    fig = px.histogram(ds.df,
+                       x=DataSchema.age_groups,
+                       y=DataSchema.total_working_years,
+                       color=DataSchema.attrition,
+                       histfunc="avg",
+                       barmode="overlay"
+                       )
+
+    fig.update_layout(
+        title_text="Age - Total Working Years",
+        xaxis_title="Age",
+        yaxis_title="Total Working Years"
+    )
+
+    return fig
+
+
+def plot_age_years_at_company(ds: DataSource) -> go.Figure:
+    fig = px.histogram(
+        ds.df,
+        x=DataSchema.age_groups,
+        y=DataSchema.years_at_company,
+        color=DataSchema.attrition,
+        histfunc="avg",
+        barmode="overlay"
+    )
+
+    fig.update_layout(
+        title_text="Age - Years At Company",
+        xaxis_title="Age",
+        yaxis_title="Years At Company"
+    )
+
+    return fig
+
+
+def plot_years_at_company_monthly_income(ds: DataSource) -> go.Figure:
+    fig = px.histogram(
+        ds.df,
+        x=DataSchema.years_at_company_groups,
+        y=DataSchema.monthly_income,
+        color=DataSchema.attrition,
+        histfunc="avg",
+        barmode="overlay"
+    )
+
+    fig.update_layout(
+        title_text="Years At Company - Monthly Income",
+        xaxis_title="Years At Company",
+        yaxis_title="Monthly Income"
+    )
+
+    return fig
+
+
+def plot_education_attrition(ds: DataSource) -> go.Figure:
+    fig = px.parallel_categories(
+        ds.df,
+        dimensions=[
+            DataSchema.education_field,
+            DataSchema.education,
+            DataSchema.attrition
+        ]
+    )
+
+    fig.update_layout(
+        title_text="Education - Attrition",
+        
     )
 
     return fig
