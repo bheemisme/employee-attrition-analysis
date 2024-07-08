@@ -100,8 +100,8 @@ def plot_departments_table(ds: DataSource) -> go.Figure:
 
 
 def plot_employee_env_sat(ds: DataSource) -> go.Figure:
-
-    fig = px.parallel_categories(ds.df, dimensions=[DataSchema.department,
+    pivot = ds.df[ds.df[DataSchema.total_working_years] <= 10]
+    fig = px.parallel_categories(pivot, dimensions=[DataSchema.department,
                                                     DataSchema.environment_satisfaction,
                                                     DataSchema.attrition
                                                     ])
@@ -112,8 +112,8 @@ def plot_employee_env_sat(ds: DataSource) -> go.Figure:
 
 
 def plot_employee_job_sat(ds: DataSource) -> go.Figure:
-
-    fig = px.parallel_categories(ds.df, dimensions=[
+    pivot = ds.df[ds.df[DataSchema.total_working_years] <= 10]
+    fig = px.parallel_categories(pivot, dimensions=[
         DataSchema.department,
         DataSchema.job_satisfaction,
         DataSchema.attrition
@@ -130,7 +130,7 @@ def plot_working_groups(ds: DataSource) -> go.Figure:
                  x=DataSchema.working_year_groups,
                  y=DataSchema.monthly_income,
                  color=DataSchema.attrition
-                )
+                 )
 
     fig.update_layout(
         title_text='Working Groups - Monthly Income',
@@ -162,7 +162,6 @@ def plot_age_monthly_income(ds: DataSource) -> go.Figure:
                        histfunc="avg",
                        barmode="overlay"
                        )
-
     fig.update_layout(
         title_text="Age - Monthly Income",
         xaxis_title="Age",
@@ -228,16 +227,16 @@ def plot_years_at_company_monthly_income(ds: DataSource) -> go.Figure:
     return fig
 
 
-def plot_education_attrition(ds: DataSource) -> go.Figure:
-    fig = px.parallel_categories(
-        ds.df,
-        dimensions=[
-            DataSchema.education_field,
-            DataSchema.education,
-            DataSchema.attrition
-        ]
-    )
+
+def plot_attrition_pie(ds: DataSource) -> go.Figure:
+
+    pivot = ds.df.groupby(by=[DataSchema.attrition]).count()[
+        DataSchema.employee_id]
+    fig = px.pie(data_frame=ds.df, values=pivot.to_numpy(),
+                 names=list(pivot.keys()))
+
     fig.update_layout(
-        title_text="Education - Attrition"
+        title_text="Attrition"
     )
     return fig
+

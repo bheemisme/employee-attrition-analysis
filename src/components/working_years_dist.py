@@ -12,6 +12,7 @@ def render(app: Dash, source: DataSource) -> html.Div:
                 dcc.Graph(figure=plot_working_years_distribution(source)),
             ]
         ),
-        id=ids.WORKING_YEARS
+        id=ids.WORKING_YEARS,
+        className='w-50'
     )
 

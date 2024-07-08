@@ -8,6 +8,7 @@ def render(app: Dash, source: DataSource) -> html.Div:
 
     return html.Div(
         dcc.Graph(figure=plot_working_groups(source)),
-        id=ids.WORKING_YEARS_MONTHLY_INCOME
+        id=ids.WORKING_YEARS_MONTHLY_INCOME,
+        className='w-50'
     )
 
