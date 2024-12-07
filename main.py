@@ -19,7 +19,7 @@ def main() -> None:
 
     app.title = "Employee Attrition Dashboard"
     app.layout = create_layout(app, data)
-    app.run(server="0.0.0.0",debug=True,port=PORT)
+    app.run(host="0.0.0.0",debug=True,port=PORT)
 
 
 if __name__ == "__main__":
