@@ -5,7 +5,9 @@ from src.components.layout import create_layout
 
 from src.data.loader import load_data
 from src.data.source import DataSource
+import os
 
+PORT = os.environ['PORT']
 DATA_PATH = "./data/data.csv"
 
 
@@ -17,7 +19,7 @@ def main() -> None:
 
     app.title = "Employee Attrition Dashboard"
     app.layout = create_layout(app, data)
-    app.run(debug=True,port="8080")
+    app.run(server="0.0.0.0",debug=True,port=PORT)
 
 
 if __name__ == "__main__":
